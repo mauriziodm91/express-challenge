@@ -10,11 +10,21 @@ async function addNewTask(name, description, completed) {
 }
 
 async function getTaskByID(id) {
-  return await Tasks.findById(id)
+  return await Tasks.findById(id, { __v: 0 })
+}
+
+async function updateExistingTask(id, data) {
+  const { name, description, completed } = data
+  return await Tasks.findByIdAndUpdate(
+    id,
+    { name, description, completed },
+    { new: true }
+  ).select('-__v')
 }
 
 module.exports = {
   getAllTasks,
   addNewTask,
   getTaskByID,
+  updateExistingTask,
 }

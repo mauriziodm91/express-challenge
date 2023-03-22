@@ -2,6 +2,7 @@ const {
   getAllTasks,
   addNewTask,
   getTaskByID,
+  updateExistingTask,
 } = require('../../models/task.model')
 const { validationResult } = require('express-validator')
 const { default: mongoose } = require('mongoose')
@@ -49,8 +50,28 @@ async function httpGetTaskById(req, res) {
   }
 }
 
+async function httpUpdateTask(req, res) {
+  const error = validationResult(req)
+  if (!error.isEmpty()) {
+    return res.status(400).json({ errors: error.array() })
+  }
+
+  const { id } = req.params
+  try {
+    const task = await updateExistingTask(id, req.body)
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found' })
+    }
+    res.status(200).json(task)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Server Error')
+  }
+}
+
 module.exports = {
   httpGetAllTasks,
   httpAddNewTask,
   httpGetTaskById,
+  httpUpdateTask,
 }
