@@ -22,9 +22,14 @@ async function updateExistingTask(id, data) {
   ).select('-__v')
 }
 
+async function removeTask(task) {
+  return await task.deleteOne()
+}
+
 module.exports = {
   getAllTasks,
   addNewTask,
   getTaskByID,
   updateExistingTask,
+  removeTask,
 }
