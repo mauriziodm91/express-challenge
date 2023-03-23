@@ -7,12 +7,12 @@ const {
   httpUpdateTask,
   httpDeleteTask,
 } = require('./tasks.controller')
-const validators = require('../../services/utils') //Array of body validators
+const { validators, authenticateToken } = require('../../services/middlewares') //Middlewares
 
-tasksRouter.get('/', httpGetAllTasks)
-tasksRouter.get('/:id', httpGetTaskById)
-tasksRouter.post('/', validators, httpAddNewTask)
-tasksRouter.put('/:id', validators, httpUpdateTask)
-tasksRouter.delete('/:id', httpDeleteTask)
+tasksRouter.get('/', authenticateToken, httpGetAllTasks)
+tasksRouter.get('/:id', authenticateToken, httpGetTaskById)
+tasksRouter.post('/', authenticateToken, validators, httpAddNewTask)
+tasksRouter.put('/:id', authenticateToken, validators, httpUpdateTask)
+tasksRouter.delete('/:id', authenticateToken, httpDeleteTask)
 
 module.exports = tasksRouter

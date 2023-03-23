@@ -8,9 +8,17 @@ const {
 const { validationResult } = require('express-validator')
 const { default: mongoose } = require('mongoose')
 
-//Callback function for GET method
 async function httpGetAllTasks(req, res) {
-  res.status(200).json(await getAllTasks())
+  try {
+    const tasks = await getAllTasks()
+    if (tasks.length === 0) {
+      res.status(404).json({ message: 'There are no tasks' })
+    } else {
+      res.status(200).json(tasks)
+    }
+  } catch (err) {
+    res.status(500).send('Server Error')
+  }
 }
 
 //Callback function for POST method
