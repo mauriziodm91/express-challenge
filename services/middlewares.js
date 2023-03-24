@@ -3,7 +3,10 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const validators = [
-  body('name').notEmpty().withMessage('Name is required'),
+  body('name')
+    .notEmpty()
+    .isString()
+    .withMessage('Name is required and must be a string'),
   body('description').optional(),
   body('completed')
     .optional()
