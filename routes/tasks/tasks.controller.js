@@ -32,7 +32,7 @@ async function httpAddNewTask(req, res) {
 
   try {
     const task = await addNewTask(name, description, completed)
-    res.status(200).json(task)
+    res.status(201).json(task)
   } catch (err) {
     console.error(err)
     res.status(500).send('Server Error')
