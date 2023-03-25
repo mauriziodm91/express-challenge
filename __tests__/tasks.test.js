@@ -1,8 +1,8 @@
 const request = require('supertest')
-const app = require('../../app')
+const app = require('../app')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-const { mongoConnect, mongoDisconnect } = require('../../services/mongo')
+const { mongoConnect, mongoDisconnect } = require('../services/mongo')
 
 describe('Launches API', () => {
   beforeAll(async () => {
