@@ -195,7 +195,7 @@ describe('Launches API', () => {
 
   //DELETE /v1/tasks/:id
 
-  describe('test POST /v1/tasks/:id', () => {
+  describe('test DELETE /v1/tasks/:id', () => {
     test('it should delete a task', async () => {
       const response = await request(app)
         .post('/v1/tasks')
