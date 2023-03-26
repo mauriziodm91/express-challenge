@@ -18,7 +18,7 @@ Returns an access token used for creating, modifying and deleting tasks. **You m
 
 ```javascript
 {
-  ;('username') //String *Required*
+  'username' //String *Required*
 }
 ```
 
